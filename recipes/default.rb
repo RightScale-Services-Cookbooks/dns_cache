@@ -18,7 +18,7 @@
 #
 package node[:dns_cache][:package]
 
-template "/etc/ndjbdns/dnscache.conf" do
+template "#{node[:dns_cache][:conf_dir]}/dnscache.conf" do
   source "dnscache.conf.erb"
   owner "root"
   group "root"
@@ -27,7 +27,7 @@ template "/etc/ndjbdns/dnscache.conf" do
   action :create
 end
 
-template "/etc/njdbdns/servers/roots" do
+template "#{node[:dns_cache][:conf_dir]}/servers/roots" do
   source "roots.erb"
   owner "root"
   group "root"
@@ -37,7 +37,7 @@ template "/etc/njdbdns/servers/roots" do
 end
 
 node[:dns_cache][:subnets_allowed].each do |subnet|
-  template "/etc/ndjbdns/ip/#{subnet}" do
+  template "#{node[:dns_cache][:conf_dir]}/ip/#{subnet}" do
     source "subnet.erb"
     owner "root"
     group "root"
