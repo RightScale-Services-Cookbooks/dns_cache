@@ -32,6 +32,7 @@ template "#{node[:dns_cache][:conf_dir]}/servers/roots" do
   owner "root"
   group "root"
   mode "0644"
+  backup false
   variables( :roots => node[:dns_cache][:roots] )
   action :create
 end

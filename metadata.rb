@@ -8,3 +8,10 @@ version          '0.1.0'
 
 
 recipe "dns_cache::default", "installs and sets up dns_cache"
+
+attribute "dns_cache/roots",
+  :display_name => "DNS Cache Roots",
+  :description => "Array of DNS Roots",
+  :required => "optional",
+  :type => "array",
+  :recipes => [ "dns_cache::default" ]
