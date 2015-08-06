@@ -16,29 +16,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-package node[:dns_cache][:package]
+package node['dns_cache']['package']
 
-template "#{node[:dns_cache][:conf_dir]}/dnscache.conf" do
+template "#{node['dns_cache']['conf_dir']}/dnscache.conf" do
   source "dnscache.conf.erb"
   owner "root"
   group "root"
   mode "0644"
-  variables( :ip => node[:cloud][:private_ips][0] )
+  variables( :ip => node['cloud']['private_ips'][0] )
   action :create
 end
 
-template "#{node[:dns_cache][:conf_dir]}/servers/roots" do
+template "#{node['dns_cache']['conf_dir']}/servers/roots" do
   source "roots.erb"
   owner "root"
   group "root"
   mode "0644"
   backup false
-  variables( :roots => node[:dns_cache][:roots] )
+  variables( :roots => node['dns_cache']['roots'] )
   action :create
 end
 
-node[:dns_cache][:subnets_allowed].each do |subnet|
-  template "#{node[:dns_cache][:conf_dir]}/ip/#{subnet}" do
+node['dns_cache']['subnets_allowed'].each do |subnet|
+  template "#{node['dns_cache']['conf_dir']}/ip/#{subnet}" do
     source "subnet.erb"
     owner "root"
     group "root"
